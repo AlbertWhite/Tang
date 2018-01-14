@@ -12,7 +12,6 @@
   width: 2px;
   background: black;
   display: inline-block;
-  height: 150px;
 }
 
 .time-line .time-text {
@@ -55,9 +54,28 @@
 
 .time-line .time-text .name .firstletter {
   display: inline-block;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .time-line .time-text .subcontent {
   margin-left: 38px;
+}
+
+.poet-text {
+  position: absolute;
+  left: 36%;
+  font-size: 17px;
+  line-height: 45px;
+  letter-spacing: 0.8px;
+}
+
+.poet-text .poet-name {
+  opacity: 1;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.poet-text .poet-year {
+  opacity: 0.6;
+  display: inline-block;
 }
