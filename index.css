@@ -1,5 +1,6 @@
-.timeline-container {
-  margin: 100px;
+.events-container {
+  position: relative;
+  padding-left: 50%;
 }
 
 .time-line {
@@ -11,18 +12,19 @@
   width: 2px;
   background: black;
   display: inline-block;
+  height: 150px;
 }
 
 .time-line .time-text {
-  display: inline-block;
   position: absolute;
   left: 10px;
   top: -5px;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 17px;
+  line-height: 45px;
+  letter-spacing: 0.8px;
 }
 
-.time-line .time-bar::before {
+/* .time-line .time-bar::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -34,4 +36,28 @@
   background-color: #8c8c8c;
   left: -4px;
   top: 0px;
+} */
+
+.time-line .time-text .year {
+  opacity: 0.6;
+  display: inline-block;
+}
+
+.time-line .time-text .name {
+  opacity: 1;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.time-line .time-text .name * {
+  display: inline-block;
+}
+
+.time-line .time-text .name .firstletter {
+  display: inline-block;
+  font-size: 30px;
+}
+
+.time-line .time-text .subcontent {
+  margin-left: 38px;
 }

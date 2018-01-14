@@ -1,0 +1,12 @@
+{
+  "name": "yes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AlbertWhite/Tang.git",
+  "author": "yuebaiXu <xyb1114@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.23.5",
+    "gulp": "^3.9.1"
+  }
+}

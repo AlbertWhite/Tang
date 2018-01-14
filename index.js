@@ -1,66 +1,75 @@
-var TimelineModel = Backbone.Model.extend({
+var EventModel = Backbone.Model.extend({
   defaults: {
     id: 0,
     name: "",
-    startyear: 0,
-    endyear: 0
+    year: 0,
+    subcontent: []
   }
 });
 
-var TimeLineCollection = Backbone.Collection.extend({
-  url: "./emperor.json",
-  model: TimelineModel
+var EventCollection = Backbone.Collection.extend({
+  url: "./data/events.json",
+  model: EventModel
 });
 
-var TimeLineView = Backbone.View.extend({
+var EventView = Backbone.View.extend({
   events: {},
   tagName: "div",
   render: function() {
-    var height =
-      parseInt(this.model.get("endyear")) -
-      parseInt(this.model.get("startyear"));
+    var height = 30;
 
-    var timeline = $.parseHTML("<div class='time-line'></div>");
+    var event = $.parseHTML("<div class='time-line'></div>");
     var timebar = $.parseHTML("<div class='time-bar'></div>");
     var timetext = $.parseHTML(
       "<div class='time-text'>" +
-        this.model.get("name") +
-        this.model.get("startyear") +
+        "<div class='year'>" +
+        this.model.get("year") +
+        "</div>" +
+        "<div class='name'><div class='firstletter'>" +
+        this.model.get("name")[0] +
+        "</div><div>" +
+        this.model.get("name").substr(1) +
+        "</div></div>" +
         "</div>"
     );
 
-    $(timebar).css("height", height * 5 + "px");
-    $(timeline).css("height", height * 5 + "px");
+    if (this.model.get("subcontent").length > 0) {
+      _.each(this.model.get("subcontent"), function(content) {
+        $(timetext).append("<div class='subcontent'>" + content + "</div>");
+      });
+    }
 
-    $(timeline).append(timetext);
-    $(timeline).append(timebar);
-    this.$el.html(timeline);
+    $(event).css("height", height * 5 + "px");
+
+    $(event).append(timetext);
+    $(event).append(timebar);
+    this.$el.html(event);
     return this;
   }
 });
 
-var TimeLineContainerView = Backbone.View.extend({
-  el: ".timeline-container",
-  model: TimelineModel,
+var EventContainerView = Backbone.View.extend({
+  el: ".events-container",
+  model: EventModel,
   initialize: function() {
     this.collection.on("sync", this.render, this);
   },
   render: function() {
     this.collection.each(function(model) {
-      var timeLineView = new TimeLineView({
+      var eventView = new EventView({
         model: model
       });
-      this.$el.append(timeLineView.render().el);
+      this.$el.append(eventView.render().el);
     }, this);
   }
 });
 
-var timeLineCollection = new TimeLineCollection();
-var timeLineContainerView = new TimeLineContainerView({
-  collection: timeLineCollection
+var eventCollection = new EventCollection();
+var eventContainerView = new EventContainerView({
+  collection: eventCollection
 });
 
-timeLineCollection.fetch({
+eventCollection.fetch({
   success: function(collection, response) {
     console.log(collection);
     console.log(response);
