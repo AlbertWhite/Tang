@@ -1,5 +1,6 @@
 const EVENT_START_YEAR = 618;
 const ZOOM_IN_TIMES = 27;
+var POETS_INFORMATION;
 
 var EventModel = Backbone.Model.extend({
   defaults: {
@@ -90,6 +91,15 @@ var EventContainerView = Backbone.View.extend({
 var PoetView = Backbone.View.extend({
   className: "poet-text",
   tagName: "div",
+  events: {
+    "click .poet-name": "viewPoetDetail"
+  },
+  viewPoetDetail(){
+    for(var i = 0; i < POETS_INFORMATION.length; i++){
+      var poet = POETS_INFORMATION[i];
+      var life_duration = poet.end - poet.start;      
+    }
+  },
   render: function() {
 
     //if it is new node
@@ -113,7 +123,7 @@ var PoetContainerView = Backbone.View.extend({
     this.collection.on("sync", this.render, this);
   },
   render: function() {
-    
+
     var yearArray = []; //put all the years 
     this.collection.each(function(model) {
 
@@ -157,6 +167,7 @@ eventCollection.fetch({
 
 poetCollection.fetch({
   success: function(collection, response) {
+    POETS_INFORMATION = response;
     console.log(collection);
     console.log(response);
   },
