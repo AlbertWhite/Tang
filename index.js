@@ -91,8 +91,9 @@ var PoetView = Backbone.View.extend({
   className: "poet-text",
   tagName: "div",
   render: function() {
+
+    //if it is new node
     var distance = this.model.get("start") - EVENT_START_YEAR;
-    console.log(distance);
     var poet = $.parseHTML(
       "<div class='poet-name'>" +
         this.model.get("name") +
@@ -112,11 +113,29 @@ var PoetContainerView = Backbone.View.extend({
     this.collection.on("sync", this.render, this);
   },
   render: function() {
+    
+    var yearArray = []; //put all the years 
     this.collection.each(function(model) {
-      var poetView = new PoetView({
-        model: model
-      });
-      $(".events-container").append(poetView.render().el);
+
+      var isNewNode = false;
+      if(yearArray.indexOf(model.get('start')) == -1){
+        isNewNode = true;
+      }
+
+      if(isNewNode){
+        var poetView = new PoetView({
+          model: model
+        });
+        $(".events-container").append(poetView.render().el);
+        yearArray.push(model.get('start'));
+      }else{
+        $(".poet-text").each(function(index, ele){
+          if($(ele).html().includes(model.get("start"))){
+            $(ele).find(".poet-name").append(model.get("name"));
+          }
+        });
+      }
+
     }, this);
   }
 });

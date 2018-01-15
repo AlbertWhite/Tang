@@ -67,6 +67,8 @@
   font-size: 17px;
   line-height: 45px;
   letter-spacing: 0.8px;
+  width: 200px;
+  text-align: right
 }
 
 .poet-text .poet-name {
