@@ -94,14 +94,33 @@ var PoetView = Backbone.View.extend({
   events: {
     "click .poet-name": "viewPoetDetail"
   },
-  viewPoetDetail(){
-    for(var i = 0; i < POETS_INFORMATION.length; i++){
-      var poet = POETS_INFORMATION[i];
-      var life_duration = poet.end - poet.start;      
+  viewPoetDetail(e) {
+    $(".time-life-bar").remove();
+
+    var selectedPoetName = $(e.currentTarget).text();
+    for (var i = 0; i < POETS_INFORMATION.length; i++) {
+      if (POETS_INFORMATION[i].name == selectedPoetName) {
+        var poet = POETS_INFORMATION[i];
+        var life_duration = poet.end - poet.start;
+
+        //new life bar
+        var lifebar = $.parseHTML("<div class='time-life-bar'></div>");
+
+        $(lifebar).css("height", life_duration * ZOOM_IN_TIMES + "px");
+        // $(lifebar).css("position", "absolute");
+        // $(lifebar).css("top", "0px");
+        // $(lifebar).css("width", "10px");
+        // $(lifebar).css("background", "red");
+        // $(lifebar).css("left", "0px");
+
+        $(e.currentTarget)
+          .parent()
+          .append(lifebar);
+        console.log(life_duration);
+      }
     }
   },
   render: function() {
-
     //if it is new node
     var distance = this.model.get("start") - EVENT_START_YEAR;
     var poet = $.parseHTML(
@@ -123,29 +142,32 @@ var PoetContainerView = Backbone.View.extend({
     this.collection.on("sync", this.render, this);
   },
   render: function() {
-
-    var yearArray = []; //put all the years 
+    var yearArray = []; //put all the years
     this.collection.each(function(model) {
-
       var isNewNode = false;
-      if(yearArray.indexOf(model.get('start')) == -1){
+      if (yearArray.indexOf(model.get("start")) == -1) {
         isNewNode = true;
       }
 
-      if(isNewNode){
+      if (isNewNode) {
         var poetView = new PoetView({
           model: model
         });
         $(".events-container").append(poetView.render().el);
-        yearArray.push(model.get('start'));
-      }else{
-        $(".poet-text").each(function(index, ele){
-          if($(ele).html().includes(model.get("start"))){
-            $(ele).find(".poet-name").append(model.get("name"));
+        yearArray.push(model.get("start"));
+      } else {
+        $(".poet-text").each(function(index, ele) {
+          if (
+            $(ele)
+              .html()
+              .includes(model.get("start"))
+          ) {
+            $(ele)
+              .find(".poet-name")
+              .append(model.get("name"));
           }
         });
       }
-
     }, this);
   }
 });

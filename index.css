@@ -63,12 +63,12 @@
 
 .poet-text {
   position: absolute;
-  left: 36%;
+  left: 30%;
   font-size: 17px;
   line-height: 45px;
   letter-spacing: 0.8px;
   width: 200px;
-  text-align: right
+  text-align: right;
 }
 
 .poet-text .poet-name {
@@ -80,4 +80,12 @@
 .poet-text .poet-year {
   opacity: 0.6;
   display: inline-block;
+}
+
+.time-life-bar {
+  position: absolute;
+  top: 0px;
+  width: 10px;
+  background: red;
+  right: -40px;
 }
