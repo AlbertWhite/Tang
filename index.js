@@ -31,6 +31,7 @@ var PoetCollection = Backbone.Collection.extend({
 });
 
 var EventView = Backbone.View.extend({
+  className: "time-line",
   initialize: function(options) {
     //parameters need to be passed in variable options
     this.nextYear = options.nextYear;
@@ -40,7 +41,7 @@ var EventView = Backbone.View.extend({
   render: function() {
     var height = this.nextYear - this.model.get("year");
     var event = $.parseHTML("<div class='time-line'></div>");
-    var timebar = $.parseHTML("<div class='time-bar'></div>");
+    //var timebar = $.parseHTML("<div class='time-bar'></div>");
     var timetext = $.parseHTML(
       "<div class='time-text'>" +
         "<div class='year'>" +
@@ -61,9 +62,9 @@ var EventView = Backbone.View.extend({
     // }
 
     $(event).css("height", height * ZOOM_IN_TIMES + "px");
-    $(timebar).css("height", height * ZOOM_IN_TIMES + "px");
+    //$(timebar).css("height", height * ZOOM_IN_TIMES + "px");
     $(event).append(timetext);
-    $(event).append(timebar);
+    //$(event).append(timebar);
     this.$el.html(event);
     return this;
   }
@@ -130,7 +131,7 @@ var PoetView = Backbone.View.extend({
         this.model.get("start") +
         "</div>"
     );
-    this.$el.css("top", distance * ZOOM_IN_TIMES + "px");
+    this.$el.css("top", distance * ZOOM_IN_TIMES + 200 + "px");
     this.$el.html(poet);
     return this;
   }
@@ -153,7 +154,7 @@ var PoetContainerView = Backbone.View.extend({
         var poetView = new PoetView({
           model: model
         });
-        $(".events-container").append(poetView.render().el);
+        $(".poets-container").append(poetView.render().el);
         yearArray.push(model.get("start"));
       } else {
         $(".poet-text").each(function(index, ele) {

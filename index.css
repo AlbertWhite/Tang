@@ -1,6 +1,33 @@
+body {
+  background-image: url(./tang.png);
+  color: white;
+  background-repeat: no-repeat;
+  background-color: #151515;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.3);
+  margin: 150px auto;
+  border-radius: 10px;
+  position: relative;
+  width: 800px;
+  width: 90%;
+  height: 100%;
+}
+
+.container .title {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 25px;
+}
+
 .events-container {
   position: relative;
   padding-left: 50%;
+  padding-top: 200px;
 }
 
 .time-line {
