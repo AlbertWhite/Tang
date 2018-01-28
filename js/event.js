@@ -11,7 +11,8 @@ var EventModel = Backbone.Model.extend({
 });
 
 var EventCollection = Backbone.Collection.extend({
-  url: "https://github.com/AlbertWhite/Tang/blob/master/data/event.json",
+  url:
+    "https://raw.githubusercontent.com/AlbertWhite/Tang/master/data/events.json",
   model: EventModel
 });
 
