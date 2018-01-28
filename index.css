@@ -21,13 +21,41 @@ body {
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 25px;
+  font-size: 30px;
+}
+
+.container .subtitle {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.container .view-more {
+  position: absolute;
+  top: 190px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #ffa302;
+  font-size: 15px;
+}
+
+.container .title .poet {
+  color: #ffa302;
+  display: inline-block;
+}
+
+.container .title .history {
+  display: inline-block;
 }
 
 .events-container {
   position: relative;
   padding-left: 50%;
-  padding-top: 200px;
+  padding-top: 400px;
 }
 
 .time-line {
@@ -88,9 +116,14 @@ body {
   margin-left: 38px;
 }
 
+.poets-container {
+  position: absolute;
+  top: 0px;
+  left: 20%;
+}
+
 .poet-text {
   position: absolute;
-  left: 30%;
   font-size: 17px;
   line-height: 45px;
   letter-spacing: 0.8px;
@@ -102,6 +135,26 @@ body {
   opacity: 1;
   display: inline-block;
   margin-right: 10px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.poet-text .poet-name:focus,
+.poet-text .poet-name:hover,
+.poet-text .poet-name:active {
+  text-decoration: underline;
+  color: #ffa302;
+}
+
+.poet-text .poet-name:focus,
+.poet-text .poet-name:active {
+  text-decoration: none;
+  color: #ffa302;
+}
+
+.poet-text .poet-name.highlight {
+  color: #ffa302;
 }
 
 .poet-text .poet-year {
@@ -111,8 +164,53 @@ body {
 
 .time-life-bar {
   position: absolute;
-  top: 0px;
-  width: 10px;
-  background: red;
+  width: 1px;
+  background: white;
   right: -40px;
+}
+
+.time-life-bar .life-center-bar {
+  position: absolute;
+  top: 51%;
+  width: 20px;
+  height: 1px;
+  background: white;
+  left: -20px;
+}
+
+.time-life-bar .life-start {
+  position: absolute;
+  left: 20px;
+  opacity: 0.8;
+  top: -18px;
+}
+
+.time-life-bar .life-end {
+  position: absolute;
+  left: 20px;
+  opacity: 0.8;
+  bottom: -18px;
+}
+
+.time-life-bar:before {
+  content: "\A";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  background: #ffa302;
+  position: absolute;
+  right: -5px;
+}
+
+.time-life-bar:after {
+  content: "\A";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  background: #ffa302;
+  position: absolute;
+  right: -5px;
+  bottom: 0px;
 }

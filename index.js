@@ -90,6 +90,9 @@ var EventContainerView = Backbone.View.extend({
 });
 
 var PoetView = Backbone.View.extend({
+  initialize: function(options) {
+    this.middleAge = options.middleAge;
+  },
   className: "poet-text",
   tagName: "div",
   events: {
@@ -122,13 +125,13 @@ var PoetView = Backbone.View.extend({
     }
   },
   render: function() {
-    //if it is new node
-    var distance = this.model.get("start") - EVENT_START_YEAR;
+    //get the middle age of the poet
+    var distance = this.middleAge - EVENT_START_YEAR;
     var poet = $.parseHTML(
       "<div class='poet-name'>" +
         this.model.get("name") +
         "</div><div class='poet-year'>" +
-        this.model.get("start") +
+        this.middleAge +
         "</div>"
     );
     this.$el.css("top", distance * ZOOM_IN_TIMES + 200 + "px");
@@ -146,22 +149,24 @@ var PoetContainerView = Backbone.View.extend({
     var yearArray = []; //put all the years
     this.collection.each(function(model) {
       var isNewNode = false;
-      if (yearArray.indexOf(model.get("start")) == -1) {
+      var middleAge = Math.floor((model.get("end") + model.get("start")) / 2);
+      if (yearArray.indexOf(middleAge) == -1) {
         isNewNode = true;
       }
 
       if (isNewNode) {
         var poetView = new PoetView({
-          model: model
+          model: model,
+          middleAge: middleAge
         });
         $(".poets-container").append(poetView.render().el);
-        yearArray.push(model.get("start"));
+        yearArray.push(middleAge);
       } else {
         $(".poet-text").each(function(index, ele) {
           if (
             $(ele)
               .html()
-              .includes(model.get("start"))
+              .includes(middleAge)
           ) {
             $(ele)
               .find(".poet-name")
