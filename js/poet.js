@@ -10,7 +10,7 @@ var PoetModel = Backbone.Model.extend({
 });
 
 var PoetCollection = Backbone.Collection.extend({
-  url: "../data/poets.json",
+  url: "./data/poets.json",
   model: PoetModel
 });
 
